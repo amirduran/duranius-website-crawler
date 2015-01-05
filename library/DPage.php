@@ -1,5 +1,5 @@
 <?php
-require_once './simple_html_dom.php';
+require_once 'simple_html_dom.php';
 /**
  * Description of DPage
  *

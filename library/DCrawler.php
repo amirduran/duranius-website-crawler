@@ -1,5 +1,5 @@
 <?php
-require_once './DRequest.php';
+require_once 'DRequest.php';
 /**
  * Easy website crawler.
  *

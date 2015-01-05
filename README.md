@@ -39,7 +39,7 @@ To instatiate DCrowler object you should do this:
 ```
 require_once("DCrawler.php");
 $crawler=new DCrawler();
-$crawler->crawlWebsites(array("http://www.bbc.com/"));//To crawl bbc.com only
+$crawler->crawlWebsite("http://www.bbc.com/");//To crawl bbc.com only
 $pages=$crawler->getResults();
 ```
 
@@ -72,6 +72,25 @@ foreach($pages as $p){
 	<img src="<?php echo $values;?>" >
 	<?php 
 	}
+}
+```
+
+Now let's say we want extract only element with HTML attribute id="item1" then you will do this 
+
+
+```
+foreach($pages as $p){
+    $htmlElement=$p->getElementWithId("item1");
+
+    //Do with this element whatever you want
+}
+```
+
+If you want to retrieve elements with class name "someClass" then you can do it like this:
+
+```
+foreach($pages as $p){
+    $htmlElements=$p->getElementsWithClass("someClass");
 }
 ```
 

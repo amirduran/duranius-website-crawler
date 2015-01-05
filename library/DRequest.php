@@ -1,6 +1,6 @@
 <?php
 
-require_once './DPage.php';
+require_once 'DPage.php';
 
 /**
  * Description of DRequest
@@ -166,7 +166,8 @@ class DRequest {
             CURLOPT_MAXREDIRS => $this->maxRedirects,
             CURLOPT_TIMEOUT => $this->timeout,
             CURLOPT_HEADER => true,
-            CURLOPT_USERAGENT, $this->userAgent
+            CURLOPT_USERAGENT, $this->userAgent,
+            CURLOPT_SSL_VERIFYPEER,false
         );
     }
 
