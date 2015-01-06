@@ -1,26 +1,58 @@
 <?php
 require_once 'simple_html_dom.php';
 /**
- * Description of DPage
+ * Crawled page data is saved in this class
  *
- * @author Amir Duran
+ * @author Amir Duran <amir.duran@gmail.com>
+ * @version 1.0
  */
 class DPage {
+    /**
+     *
+     * @var string Page headers 
+     */
     protected $headers;
+    /**
+     *
+     * @var String Page content 
+     */
     protected $content;
+    /**
+     *
+     * @var String Page URL
+     */
     public $url;
+    /**
+     *
+     * @var mixed Errors during crawl 
+     */
     public $errors;
+    /**
+     *
+     * @var simple_html_dom
+     */
     public $htmlDom;
     
+    /**
+     * Class constructor is setting headers, content, url and htmlDom attributes to null
+     */
     public function __construct() {
         $this->headers=null;
         $this->content=null;
         $this->url=null;
         $this->htmlDom=new simple_html_dom();
     }
+    /**
+     * Call this function if you want to set page headers
+     * @param string $headers
+     */
     public function setHeaders($headers){
         $this->headers=$headers;
     }
+     /**
+     * Call this function if you want to set page content
+     * @param string $content
+     */
     public function setContent($content){
         $this->content=$content;
         if(isset($content))
@@ -28,12 +60,21 @@ class DPage {
         else
             $this->htmlDom->load("");
     }
+    /**
+     * 
+     * @param string $selector You can pass here any valid jQuery selector. For example a[title], #id, .class 
+     * @return mixed 
+     */
     public function getElementsWithSelector($selector){
         if($this->checkForErrors())
             return false;
         return $this->htmlDom->find($selector);
     }
     
+    /**
+     * Returns page title
+     * @return string Returns page title
+     */
     public function getTitle(){
        if($this->checkForErrors())
             return false;
@@ -41,12 +82,19 @@ class DPage {
         if(isset($title))
             return $title[0]->innertext;
     }
+    /**
+     * Returns all page anchors
+     * @return mixed
+     */
     public function getAnchors(){
        if($this->checkForErrors())
             return false;
         return $this->htmlDom->find("a[href]");
     }
-    
+    /**
+     * Returns an array of urls in all anchors. For example (a href="http://google.com" ) will return array(0=>"http://google.com")
+     * @return array
+     */
     public function getLinkURLs(){
         if($this->checkForErrors())
             return false;
@@ -57,11 +105,19 @@ class DPage {
         }
         return $results;
     }
+    /**
+     * Returns an object containing all images in the page
+     * @return Pages
+     */
     public function getImages(){
         if($this->checkForErrors())
             return false;
         return $this->htmlDom->find("img");
     }
+    /**
+     * Returns an array of image URLs on the current page
+     * @return array
+     */
     public function getImageURLs(){
         if($this->checkForErrors())
             return false;
@@ -72,35 +128,66 @@ class DPage {
         }
         return $result;
     }
+    
+    /**
+     * Returns an element with id=$id
+     * @param string $id
+     * @return mixed
+     */
     public function getElementWithId($id){
         if($this->checkForErrors())
             return false;
         return $this->htmlDom->find("#".$id);
     }
+    /**
+     * Returns an elements with a class=$class
+     * @param string $class
+     * @return mixed
+     */
     public function getElementsWithClass($class){
         if($this->checkForErrors())
             return false;
         return $this->htmlDom->find(".".$class);
     }
+    /**
+     * Returns an elements with jQuery tag=$tag
+     * @param string $tag
+     * @return mixed
+     */
     public function getElementsWithTag($tag){
         if($this->checkForErrors())
             return false;
         return $this->htmlDom->find($tag);
     }
-    
+    /**
+     * Checks if there are errors
+     * @return boolean
+     */
     private function errorsOccured(){
         if(!isset($this->errors))
             return false;
         else
             return true;
     }
+    /**
+     * Returns all errors during page crawl
+     * @return mixed
+     */
     public function getErrors(){
         return $this->errors;
     }
+    /**
+     * Prints all errors during page crawl
+     * @return void
+     */
     public function printErrors(){
         var_dump($this->errors);
         return;
     }
+    /**
+     * Sets errors occured during page crawl
+     * @param mixed $errors
+     */
     public function setErrors($errors){
         $this->errors=$errors;
     }
