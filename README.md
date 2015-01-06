@@ -30,9 +30,9 @@ require_once("DCrawler.php");
 ```
 
 
-#How to use library
+###How to use library
 
-##Example 1
+####Example 1
 
 To instatiate DCrowler object you should do this:
 
@@ -46,10 +46,9 @@ $pages=$crawler->getResults();
 Your results are available in the `$pages` object.
 
 
-##Example 2
+####Example 2
 
 Let's try to crawl multiple websites, and extract images only:
-
 
 ```
 $crawler=new DCrawler();
@@ -74,9 +73,9 @@ foreach($pages as $p){
 	}
 }
 ```
+####Example 3
 
-Now let's say we want extract only element with HTML attribute id="item1" then you will do this 
-
+Now let's say we want extract element with HTML attribute id="item1" then you will do this:
 
 ```
 foreach($pages as $p){
@@ -86,6 +85,8 @@ foreach($pages as $p){
 }
 ```
 
+####Example 4
+
 If you want to retrieve elements with class name "someClass" then you can do it like this:
 
 ```
@@ -94,4 +95,12 @@ foreach($pages as $p){
 }
 ```
 
+####Example 5
 
+If you want to find all anchors and images with the "title" attribute
+
+```
+foreach($pages as $p){
+    $htmlElements=$p->getElementsWithTag("a[title], img[title]");
+}
+```
