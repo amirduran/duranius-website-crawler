@@ -167,7 +167,8 @@ class DRequest {
             CURLOPT_TIMEOUT => $this->timeout,
             CURLOPT_HEADER => true,
             CURLOPT_USERAGENT, $this->userAgent,
-            CURLOPT_SSL_VERIFYPEER,false
+            CURLOPT_SSL_VERIFYPEER => false,
+            
         );
     }
 

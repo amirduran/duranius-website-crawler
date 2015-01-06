@@ -2,7 +2,7 @@
 require_once '../library/DCrawler.php';
 
 $crawler=new DCrawler();
-$crawler->crawlWebsites(array("http://bbc.com","http://yahoo.com"));
+$crawler->crawlWebsites(array("http://klix.ba"));
 
 $pages=$crawler->getResults();
 
